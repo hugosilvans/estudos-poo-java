@@ -2,7 +2,8 @@ package model;
 
 import interfaces.ItemEmprestavel;
 
-public abstract class Material implements ItemEmprestavel{
+/** Abstração dos materiais; centraliza o comportamento comum do acervo. */
+public abstract class Material implements ItemEmprestavel {
     private String titulo;
     private Integer anoPublicacao;
 
@@ -13,20 +14,11 @@ public abstract class Material implements ItemEmprestavel{
         this.anoPublicacao = anoPublicacao;
     }
 
-    public String getTitulo() {
-        return this.titulo;
-    }
+    public String getTitulo() { return this.titulo; }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+    public void setTitulo(String titulo) { this.titulo = titulo; }
 
-    public Integer getAnoPublicacao() {
-        return this.anoPublicacao;
-    }
+    public Integer getAnoPublicacao() { return this.anoPublicacao; }
 
-    public void setAnoPublicacao(Integer anoPublicacao) {
-        this.anoPublicacao = anoPublicacao;
-    }
-
+    public void setAnoPublicacao(Integer anoPublicacao) { this.anoPublicacao = anoPublicacao; }
 }

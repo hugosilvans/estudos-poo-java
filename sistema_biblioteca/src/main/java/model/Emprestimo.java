@@ -1,54 +1,44 @@
 package model;
 
-import interfaces.TomadorEmprestimo;
 import interfaces.ItemEmprestavel;
+import interfaces.TomadorEmprestimo;
 
+/** Relaciona um tomador a um item e às datas de empréstimo e devolução. */
 public class Emprestimo {
     private TomadorEmprestimo tomadorEmprestimo;
     private ItemEmprestavel itemEmprestavel;
     private String dataEmprestimo;
     private String dataDevolucao;
 
-    public Emprestimo(TomadorEmprestimo tomadorEmprestimo, ItemEmprestavel itemEmprestavel, String dataEmprestimo, String dataDevolucao) {
+    public Emprestimo(TomadorEmprestimo tomadorEmprestimo, ItemEmprestavel itemEmprestavel,
+                      String dataEmprestimo, String dataDevolucao) {
         this.tomadorEmprestimo = tomadorEmprestimo;
         this.itemEmprestavel = itemEmprestavel;
         this.dataEmprestimo = dataEmprestimo;
         this.dataDevolucao = dataDevolucao;
     }
 
-    public TomadorEmprestimo getTomadorEmprestimo() {
-        return this.tomadorEmprestimo;
-    }
+    public TomadorEmprestimo getTomadorEmprestimo() { return this.tomadorEmprestimo; }
 
     public void setTomadorEmprestimo(TomadorEmprestimo tomadorEmprestimo) {
         this.tomadorEmprestimo = tomadorEmprestimo;
     }
 
-    public ItemEmprestavel getItemEmprestavel() {
-        return this.itemEmprestavel;
-    }
+    public ItemEmprestavel getItemEmprestavel() { return this.itemEmprestavel; }
 
     public void setItemEmprestavel(ItemEmprestavel itemEmprestavel) {
         this.itemEmprestavel = itemEmprestavel;
     }
 
-    public String getDataEmprestimo() {
-        return this.dataEmprestimo;
-    }
+    public String getDataEmprestimo() { return this.dataEmprestimo; }
 
-    public void setDataEmprestimo(String dataEmprestimo) {
-        this.dataEmprestimo = dataEmprestimo;
-    }
+    public void setDataEmprestimo(String dataEmprestimo) { this.dataEmprestimo = dataEmprestimo; }
 
-    public String getDataDevolucao() {
-        return this.dataDevolucao;
-    }
+    public String getDataDevolucao() { return this.dataDevolucao; }
 
-    public void setDataDevolucao(String dataDevolucao) {
-        this.dataDevolucao = dataDevolucao;
-    }
+    public void setDataDevolucao(String dataDevolucao) { this.dataDevolucao = dataDevolucao; }
 
-    public void exibirDetalhes(){
+    public void exibirDetalhes() {
         System.out.println("Data do empréstimo: " + this.dataEmprestimo);
         System.out.println("Data da devolução: " + this.dataDevolucao);
         System.out.println("TomadorEmprestimo vinculada");

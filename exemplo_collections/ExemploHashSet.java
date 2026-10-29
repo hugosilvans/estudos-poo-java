@@ -3,9 +3,10 @@ package exemplo_collections;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/** Demonstra um conjunto sem elementos duplicados e sem ordem garantida. */
 public class ExemploHashSet {
     public static void main(String[] args) {
-        HashSet<Integer> inteiros = new HashSet<>(); 
+        HashSet<Integer> inteiros = new HashSet<>();
 
         listaNomes.add("Ana");
         listaNomes.add("Bruno");
@@ -20,12 +21,10 @@ public class ExemploHashSet {
 
         inteiros.remove(3);
 
-        if (inteiros.contains(3)){
+        if (inteiros.contains(3)) {
             System.out.println("3 está na lista.");
         } else {
             System.out.println("3 NÃO está na lista.");
         }
-
-    } 
-
+    }
 }

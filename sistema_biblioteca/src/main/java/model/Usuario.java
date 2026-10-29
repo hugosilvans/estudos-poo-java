@@ -1,36 +1,33 @@
 package model;
 
+import exceptions.EmailInvalidoException;
+import exceptions.NomeInvalidoException;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import exceptions.NomeInvalidoException;
-import exceptions.EmailInvalidoException;
 
 @Entity
 @DiscriminatorValue("usuario")
-public class Usuario extends Pessoa{
+/** Perfil de usuário que pode tomar materiais emprestados. */
+public class Usuario extends Pessoa {
     private Integer matricula;
 
-    protected Usuario(){}
+    protected Usuario() {}
 
-    public Usuario(String nome, String email, Integer matricula) throws Exception{
+    public Usuario(String nome, String email, Integer matricula) throws Exception {
         super(nome, email);
         this.matricula = matricula;
 
-        if (nome == null || nome.length() < 1){
-            throw new NomeInvalidoException();             
+        if (nome == null || nome.length() < 1) {
+            throw new NomeInvalidoException();
         }
-        if (email == null || email.length() < 3){
-            throw new EmailInvalidoException();               
+        if (email == null || email.length() < 3) {
+            throw new EmailInvalidoException();
         }
     }
 
-    public Integer getMatricula() {
-        return this.matricula;
-    }
+    public Integer getMatricula() { return this.matricula; }
 
-    public void setMatricula(Integer matricula) {
-        this.matricula = matricula;
-    }
+    public void setMatricula(Integer matricula) { this.matricula = matricula; }
 
     @Override
     public void exibirInfo() {
@@ -38,5 +35,4 @@ public class Usuario extends Pessoa{
         System.out.println("e-mail: " + this.getEmail());
         System.out.println("Matrícula: " + this.matricula);
     }
-
 }

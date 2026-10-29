@@ -1,24 +1,17 @@
 package sistema_iptu;
 
+/** Tipo de imóvel usado no exercício de cálculo de IPTU. */
 public class Apartamento extends Imovel {
     private Boolean possuiElevador;
 
-    public Apartamento(Municipio municipio, Double areaM2, Integer vagas, Boolean possuiElevador){
+    public Apartamento(Municipio municipio, Double areaM2, Integer vagas, Boolean possuiElevador) {
         super(municipio, areaM2, vagas);
         this.possuiElevador = possuiElevador;
     }
 
+    public Boolean isPossuiElevador() { return this.possuiElevador; }
 
-    public Boolean isPossuiElevador() {
-        return this.possuiElevador;
-    }
+    public Boolean getPossuiElevador() { return this.possuiElevador; }
 
-    public Boolean getPossuiElevador() {
-        return this.possuiElevador;
-    }
-
-    public void setPossuiElevador(Boolean possuiElevador) {
-        this.possuiElevador = possuiElevador;
-    }
-
+    public void setPossuiElevador(Boolean possuiElevador) { this.possuiElevador = possuiElevador; }
 }

@@ -1,5 +1,6 @@
 package model;
 
+import interfaces.TomadorEmprestimo;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,51 +9,35 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 
-import interfaces.TomadorEmprestimo;
-
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_pessoa")
 
-public abstract class Pessoa implements TomadorEmprestimo{
+/** Dados compartilhados de uma pessoa; subclasses especializam os perfis da biblioteca. */
+public abstract class Pessoa implements TomadorEmprestimo {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
     private String nome;
     private String email;
 
     public abstract void exibirInfo();
 
-    protected Pessoa(){}
+    protected Pessoa() {}
 
-    public Pessoa(String nome, String email){
+    public Pessoa(String nome, String email) {
         this.nome = nome;
         this.email = email;
     }
 
-    public String getNome() {
-        return this.nome;
-    }
+    public String getNome() { return this.nome; }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+    public void setNome(String nome) { this.nome = nome; }
 
-    public String getEmail() {
-        return this.email;
-    }
+    public String getEmail() { return this.email; }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    public void setEmail(String email) { this.email = email; }
 
-    public Long getId() {
-        return this.id;
-    }
+    public Long getId() { return this.id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    public void setId(Long id) { this.id = id; }
 }

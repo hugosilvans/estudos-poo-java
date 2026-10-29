@@ -10,9 +10,9 @@ public class Main {
         SistemaOperacional Hugos = new SistemaOperacional(pc);
 
         // Criando programas
-        Programa p1 = new Programa(6, 300, 10000);  // Deve rodar com sucesso
-        Programa p2 = new Programa(2, 600, 5000);   // SSD insuficiente
-        Programa p3 = new Programa(16, 100, 8000);  // RAM insuficiente
+        Programa p1 = new Programa(6, 300, 10000); // Deve rodar com sucesso
+        Programa p2 = new Programa(2, 600, 5000);  // SSD insuficiente
+        Programa p3 = new Programa(16, 100, 8000); // RAM insuficiente
 
         // Testando execuções
         Hugos.executarPrograma(p1);
@@ -20,4 +20,3 @@ public class Main {
         Hugos.executarPrograma(p3);
     }
 }
-    

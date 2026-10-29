@@ -2,7 +2,8 @@ package model;
 
 import interfaces.ItemEmprestavel;
 
-public class Colecao implements ItemEmprestavel{
+/** Agrupamento de materiais do modelo acadêmico. */
+public class Colecao implements ItemEmprestavel {
     private String proprietario;
     private Integer qtItens;
 
@@ -11,23 +12,15 @@ public class Colecao implements ItemEmprestavel{
         this.qtItens = qtItens;
     }
 
-    public String getProprietario() {
-        return this.proprietario;
-    }
+    public String getProprietario() { return this.proprietario; }
 
-    public void setProprietario(String proprietario) {
-        this.proprietario = proprietario;
-    }
+    public void setProprietario(String proprietario) { this.proprietario = proprietario; }
 
-    public Integer getQtItens() {
-        return this.qtItens;
-    }
+    public Integer getQtItens() { return this.qtItens; }
 
-    public void setQtItens(Integer qtItens) {
-        this.qtItens = qtItens;
-    }
+    public void setQtItens(Integer qtItens) { this.qtItens = qtItens; }
 
-    public void descricao(){
+    public void descricao() {
         System.out.println("Proprietário: " + this.proprietario);
         System.out.println("Qt. Itens: " + this.qtItens);
     }

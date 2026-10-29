@@ -1,47 +1,41 @@
 package dao;
 
 import java.util.ArrayList;
-import java.util.List;
-
+import java.util.function.Consumer;
+import model.Pessoa;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
 
-import model.Pessoa;
-
+/** Acesso persistente a Pessoa, com sessões curtas e falhas propagadas ao chamador. */
 public class PessoaDAO {
+    private static final SessionFactory sessionFactory =
+        new Configuration().configure().buildSessionFactory();
 
-    private static final SessionFactory sessionFactory;
+    /** Encerre a fábrica somente ao finalizar a aplicação inteira. */
+    public void close() { sessionFactory.close(); }
 
-    static {
-        try {
-            // Configurando a sessão do Hibernate a partir do arquivo hibernate.cfg.xml
-            Configuration configuration = new Configuration().configure();
-            sessionFactory = configuration.buildSessionFactory();
-        } catch (Throwable ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
-    }
-
-    public void close() {
-        sessionFactory.close();
-    }
-
-    public void salvarPessoa(Pessoa pessoa) {
-        Transaction transaction = null;
+    private void executarTransacao(Consumer<Session> operacao) {
         try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.save(pessoa);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null && transaction.isActive()) {
-                transaction.rollback();
+            Transaction transacao = session.beginTransaction();
+            try {
+                operacao.accept(session);
+                transacao.commit();
+            } catch (RuntimeException erro) {
+                // O rollback ainda tem uma sessão aberta; não esconda a falha original.
+                try {
+                    if (transacao.isActive())
+                        transacao.rollback();
+                } catch (RuntimeException falhaRollback) {
+                    erro.addSuppressed(falhaRollback);
+                }
+                throw new IllegalStateException("Falha na persistência de Pessoa.", erro);
             }
-            e.printStackTrace();
         }
     }
+
+    public void salvarPessoa(Pessoa pessoa) { executarTransacao(session -> session.save(pessoa)); }
 
     public Pessoa getPessoaById(Long id) {
         try (Session session = sessionFactory.openSession()) {
@@ -50,48 +44,17 @@ public class PessoaDAO {
     }
 
     public void atualizarPessoa(Pessoa pessoa) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.update(pessoa);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+        executarTransacao(session -> session.update(pessoa));
     }
 
     public void deletarPessoa(Pessoa pessoa) {
-        Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
-            transaction = session.beginTransaction();
-            session.delete(pessoa);
-            transaction.commit();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+        executarTransacao(session -> session.delete(pessoa));
     }
 
-    /**
-     * Retorna todos os registros de Pessoa como um ArrayList.
-     * @return ArrayList de Pessoas
-     */
+    /** Lista vazia significa ausência de registros, não erro de conexão. */
     public ArrayList<Pessoa> getTodasPessoas() {
         try (Session session = sessionFactory.openSession()) {
-            Query<Pessoa> query = session.createQuery("FROM Pessoa", Pessoa.class);
-            List<Pessoa> pessoasList = query.list();
-            
-            // Converte a List para ArrayList explicitamente, se necessário
-            return new ArrayList<>(pessoasList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return new ArrayList<>(); // Retorna uma lista vazia em caso de erro
+            return new ArrayList<>(session.createQuery("FROM Pessoa", Pessoa.class).list());
         }
     }
-
 }

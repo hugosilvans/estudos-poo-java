@@ -1,20 +1,17 @@
 package model;
 
-public class Livro extends Material{
+/** Especialização de Material para livros do acervo. */
+public class Livro extends Material {
     private String autor;
 
-    public Livro(String titulo, Integer anoPublicacao, String autor){
+    public Livro(String titulo, Integer anoPublicacao, String autor) {
         super(titulo, anoPublicacao);
         this.autor = autor;
     }
 
-    public String getAutor() {
-        return this.autor;
-    }
+    public String getAutor() { return this.autor; }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
+    public void setAutor(String autor) { this.autor = autor; }
 
     @Override
     public void descricao() {

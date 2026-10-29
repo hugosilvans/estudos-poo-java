@@ -1,9 +1,5 @@
 package exceptions;
 
-public class EmailInvalidoException extends Exception{
-    public EmailInvalidoException(){
-        super( "Email invalido");
-        }
-        
-    }
-    
+public class EmailInvalidoException extends Exception {
+    public EmailInvalidoException() { super("Email invalido"); }
+}
