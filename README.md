@@ -25,7 +25,3 @@ Repositório de estudos acadêmicos, mantido como registro da minha aprendizagem
 ## Responsabilidades do código
 
 Os comentários das classes descrevem seus papéis no exercício; getters e setters não recebem comentários repetitivos. Em `sistema_biblioteca`, o DAO propaga falhas de persistência em vez de apresentar uma lista vazia ou sucesso aparente. Os projetos e exemplos devem ser executados individualmente, conforme seus packages e dependências Maven.
-
-## Guia do código
-
-Consulte [GUIA_CODIGO.md](GUIA_CODIGO.md) para localizar os módulos, entender as convenções e estudar as alterações.
